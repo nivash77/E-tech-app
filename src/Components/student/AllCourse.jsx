@@ -17,7 +17,7 @@ function AllCourses({ theme }) {
       try {
         // Fetch all courses
         const coursesRes = await axios.get(`${API_URL}/courses/all`);
-
+       
         // Fetch user's enrolled courses
         const enrollmentsRes = await axios.get(`${API_URL}/courses/enroll`, {
           headers: { email },
@@ -81,6 +81,7 @@ function AllCourses({ theme }) {
         lessonsData[module.id] = lessonsRes.data;
       }
       setLessons(lessonsData);
+      console.log(lessonsData);
     } catch (error) {
       console.error("Error fetching modules or lessons:", error);
     }
@@ -126,6 +127,7 @@ function AllCourses({ theme }) {
                 <p className="text-sm opacity-80 mb-4">
                   {course.description?.slice(0, 80)}...
                 </p>
+                <h4 className="text-lg font-semibold mb-2">Price:$ {course.price}</h4>
                 <div className="flex gap-2">
                   <button
                     onClick={() => handleEnroll(course.id,course.title)}
