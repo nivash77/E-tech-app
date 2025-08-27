@@ -1,0 +1,31 @@
+@import "tailwindcss";
+/* globals.css */
+
+:root {
+  /* Light Mode */
+  --primary: #3b82f6;
+  --secondary: #f3f4f6;
+  --background: #f9fafb;
+  --card-bg: #ffffff;
+  --text-color: #111827;
+}
+
+[data-theme="dark"] {
+  --primary: #2563eb;
+  --secondary: #1f2937;
+  --background: #111827;
+  --card-bg: #1f2937;
+  --text-color: #f3f4f6;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--text-color);
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.card {
+  background-color: var(--card-bg);
+  color: var(--text-color);
+  transition: background-color 0.3s, color 0.3s;
+}
