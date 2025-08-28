@@ -68,6 +68,28 @@ function CourseView({ theme }) {
     };
     fetchCourseData();
   }, [id, email]);
+  const downloadCertificate = async () => {
+  try {
+    const response = await axios.get(
+      `${API_URL}/certificate/download`,
+      {
+        params: { courseId: id, email:email },
+        responseType: 'blob',
+      }
+    );
+
+    const url = window.URL.createObjectURL(new Blob([response.data], { type: 'application/pdf' }));
+    const link = document.createElement('a');
+    link.href = url;
+    link.setAttribute('download', `certificate-${id}.pdf`);
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    window.URL.revokeObjectURL(url); // clean up
+  } catch (err) {
+    console.error('Error downloading certificate:', err);
+  }
+};
 
   const markLessonComplete = async (lessonId) => {
     try {
@@ -233,14 +255,14 @@ function CourseView({ theme }) {
           </div>
           <p className="mb-6">{progress.toFixed(1)}% Completed</p>
 
-          {progress === 100 && (
-            <a
-              href={`${API_URL}/certificate/download?courseId=${id}&email=${email}`}
-              className="block mb-6 px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 text-center"
-            >
-              Download Certificate
-            </a>
-          )}
+        {progress === 100 && (
+  <button
+    onClick={downloadCertificate}
+    className="block mb-6 px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 text-center"
+  >
+    Download Certificate
+  </button>
+)}
 
           <h4 className="text-xl font-semibold mb-4">Quick Links</h4>
           <ul className="space-y-3 mb-6">

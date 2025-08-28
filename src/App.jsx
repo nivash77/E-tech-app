@@ -35,10 +35,10 @@ function App() {
   const toggleTheme = () => {
     setTheme(prev => (prev === 'light' ? 'dark' : 'light'));
   };
-
+  const username=localStorage.getItem('userName');
   return (
     <Router>
-      <Header onToggleTheme={toggleTheme} theme={theme} />
+      <Header onToggleTheme={toggleTheme} theme={theme} username={username} />
 
       <div className="min-h-screen transition-colors duration-300 bg-[var(--background)] text-[var(--text-color)]">
         <Routes>

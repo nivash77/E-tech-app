@@ -18,7 +18,7 @@ function Login() {
       // Save role and email for Axios interceptor and navigation
       localStorage.setItem('role', response.data.role);
       localStorage.setItem('email', email);
-
+      localStorage.setItem('userName',response.data.name);
       // Redirect based on role
       switch (response.data.role) {
         case 'student':
@@ -34,6 +34,7 @@ function Login() {
           setError('Unknown user role');
       }
     } catch (err) {
+      console.error(err);
       const message = err.response?.data?.error || 'Invalid credentials';
       setError(message);
     }

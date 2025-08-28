@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { use, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
@@ -8,6 +8,7 @@ function Signup() {
   const [role, setRole] = useState('student');
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
+  const[name,setName]=useState('');
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
@@ -20,7 +21,7 @@ function Signup() {
     try {
       const response = await axios.post(
         `${import.meta.env.VITE_API_URL}/auth/register`,
-        { email, password, role }
+        { email, password, role,name }
       );
 
       // Save email for verification page
@@ -53,6 +54,14 @@ function Signup() {
         {success && <div className="bg-green-100 dark:bg-green-900 text-green-700 dark:text-green-300 p-3 rounded mb-4 text-center text-sm">{success}</div>}
 
         <form onSubmit={handleSignup} className="space-y-5">
+          <input
+            type="text"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            placeholder="Name with initials"
+            required
+            className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
           <input
             type="email"
             value={email}

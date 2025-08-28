@@ -1,15 +1,16 @@
 import { Link, useNavigate } from 'react-router-dom';
 import NotificationBell from '../NotificationBell';
 
-function Header({ onToggleTheme, theme }) {
+function Header({ onToggleTheme, theme}) {
   const navigate = useNavigate();
   const email = localStorage.getItem('email');
   const role = localStorage.getItem('role');
-
+  const username=localStorage.getItem('userName');
   const handleAuthAction = () => {
     if (email) {
       localStorage.removeItem('email');
       localStorage.removeItem('role');
+      localStorage.removeItem('userName');
       navigate('/login');
     } else {
       navigate('/login');
@@ -26,7 +27,7 @@ function Header({ onToggleTheme, theme }) {
         <div className="flex items-center gap-4 text-sm font-medium">
           {email && <NotificationBell theme={theme}/>}
 
-          {email && role === 'student' && <Link to="/dashboard" className="hover:underline">Student Dashboard</Link>}
+          {email && role === 'student' && username && <Link to="/dashboard" className="hover:underline">{username} Dashboard</Link>}
           {email && role === 'teacher' && <Link to="/teacher/dashboard" className="hover:underline">Teacher Dashboard</Link>}
           {email && role === 'admin' && <Link to="/admin/dashboard" className="hover:underline">Admin Dashboard</Link>}
 
