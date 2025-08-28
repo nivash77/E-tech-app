@@ -28,7 +28,7 @@ function Header({ onToggleTheme, theme}) {
           {email && <NotificationBell theme={theme}/>}
 
           {email && role === 'student' && username && <Link to="/dashboard" className="hover:underline">{username} Dashboard</Link>}
-          {email && role === 'teacher' && <Link to="/teacher/dashboard" className="hover:underline">Teacher Dashboard</Link>}
+          {email && role === 'teacher' && username && <Link to="/teacher/dashboard" className="hover:underline">{username} Dashboard</Link>}
           {email && role === 'admin' && <Link to="/admin/dashboard" className="hover:underline">Admin Dashboard</Link>}
 
           <button onClick={handleAuthAction} className="hover:underline">{email ? 'Logout' : 'Login'}</button>
