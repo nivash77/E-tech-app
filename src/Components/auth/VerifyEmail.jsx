@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
 
-function VerifyEmail() {
+function VerifyEmail({ theme }) {
   const [code, setCode] = useState('');
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
@@ -48,12 +48,12 @@ function VerifyEmail() {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
-      <div className="bg-white dark:bg-gray-800 shadow-xl rounded-2xl p-10 w-full max-w-md border border-gray-200 dark:border-gray-700">
-        <h2 className="text-3xl font-extrabold text-gray-900 dark:text-white text-center mb-8">Verify Your Email</h2>
+    <div className={`flex items-center justify-center min-h-screen transition-colors duration-300 ${theme === 'dark' ? 'bg-gray-900' : 'bg-gray-50'}`}>
+      <div className={`shadow-xl rounded-2xl p-10 w-full max-w-md border transition-colors duration-300 ${theme === 'dark' ? 'bg-gray-800 border-gray-700 text-white' : 'bg-white border-gray-200 text-gray-900'}`}>
+        <h2 className="text-3xl font-extrabold text-center mb-8">Verify Your Email</h2>
 
-        {error && <div className="bg-red-100 dark:bg-red-900 text-red-700 dark:text-red-300 p-3 rounded mb-4 text-center text-sm">{error}</div>}
-        {success && <div className="bg-green-100 dark:bg-green-900 text-green-700 dark:text-green-300 p-3 rounded mb-4 text-center text-sm">{success}</div>}
+        {error && <div className={`p-3 rounded mb-4 text-center text-sm ${theme === 'dark' ? 'bg-red-900 text-red-300' : 'bg-red-100 text-red-700'}`}>{error}</div>}
+        {success && <div className={`p-3 rounded mb-4 text-center text-sm ${theme === 'dark' ? 'bg-green-900 text-green-300' : 'bg-green-100 text-green-700'}`}>{success}</div>}
 
         <form onSubmit={handleVerify} className="space-y-5">
           <input
@@ -62,23 +62,20 @@ function VerifyEmail() {
             onChange={(e) => setCode(e.target.value)}
             placeholder="Enter Verification Code"
             required
-            className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className={`w-full px-4 py-3 rounded-lg border focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors duration-300 ${theme === 'dark' ? 'bg-gray-700 border-gray-600 text-gray-100' : 'bg-gray-50 border-gray-300 text-gray-900'}`}
           />
 
           <button
             type="submit"
-            className="w-full bg-blue-600 dark:bg-blue-500 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 dark:hover:bg-blue-600 transition-colors"
+            className={`w-full py-3 rounded-lg font-semibold transition-colors duration-300 ${theme === 'dark' ? 'bg-blue-500 hover:bg-blue-600 text-white' : 'bg-blue-600 hover:bg-blue-700 text-white'}`}
           >
             Verify Email
           </button>
         </form>
 
-        <p className="mt-6 text-center text-sm text-gray-600 dark:text-gray-300">
+        <p className={`mt-6 text-center text-sm ${theme === 'dark' ? 'text-gray-300' : 'text-gray-600'}`}>
           Didn't receive the code?{' '}
-          <button
-            onClick={resendCode}
-            className="text-blue-600 dark:text-blue-400 hover:underline font-medium"
-          >
+          <button className={`${theme === 'dark' ? 'text-blue-400' : 'text-blue-600'} hover:underline font-medium`} onClick={resendCode}>
             Resend
           </button>
         </p>

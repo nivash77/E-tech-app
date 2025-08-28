@@ -42,9 +42,9 @@ function App() {
 
       <div className="min-h-screen transition-colors duration-300 bg-[var(--background)] text-[var(--text-color)]">
         <Routes>
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/verify-email" element={<VerifyEmail />} />
+          <Route path="/login" element={<Login theme={theme} />} />
+          <Route path="/signup" element={<Signup theme={theme} />} />
+          <Route path="/verify-email" element={<VerifyEmail theme={theme}/>} />
 
           {/* Protected Routes */}
           <Route path="/dashboard" element={<ProtectedRoute><StudentDashboard theme={theme}/></ProtectedRoute>} />
@@ -62,7 +62,7 @@ function App() {
           <Route path="/all-courses" element={<ProtectedRoute><AllCourses theme={theme}/></ProtectedRoute>} />
          <Route path="/teacher/assignments" element={<ProtectedRoute><AssignmentManager theme={theme}/></ProtectedRoute>} />
           {/* Redirect unknown routes to login */}
-          <Route path="/" element={<Login />} />
+          <Route path="/" element={<Login theme={theme}/>} />
         </Routes>
       </div>
 
